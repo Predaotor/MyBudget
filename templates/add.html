@@ -1,0 +1,54 @@
+{% extends "base.html"%}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="mt-5">Add Expense </h3>
+   <form action="/addexpense" method="POST">
+      {{ form.hidden_tag() }}  {# Important for CSRF protection #}
+      <div class="form-group">
+        <label for=""></label>
+      </div>
+      <div class="form-group">
+        <label for="date">Date</label>
+        {{ form.date(class="form-control") }}
+        {% for error in form.date.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="expensename">Expense name</label>
+        {{ form.expensename(class="form-control") }}
+        {% for error in form.expensename.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label for="amount">Expense amount</label>
+        {{ form.amount(class="form-control") }}
+        {% for error in form.amount.errors %}
+            <span style="color: red;">{{ error }}</span>
+        {% endfor %}
+      </div>
+
+<div class="form-group">
+        <label for="category">Expense Category</label>
+        <select class="form-control" name="category" id="category">
+            <option value="Food">Food</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Business">Business</option>
+            <option value="Transport">Transport</option>
+            <option value="Rent">Rent</option>
+            <option value="Other">Other</option>
+            
+          </select>
+
+      </div>
+      
+      <input class="btn btn-danger" type="submit" value="Add">
+   </form>
+</div>
+</div>
+</div>
+{% endblock %}

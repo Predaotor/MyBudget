@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="mt-5">Filter Expenses</h3> 
+            <form action="{{ url_for('expenses') }}" method="GET">
+                <div class="form-group">
+                    <label for="time_period">Select Time Period:</label>
+                    <select class="form-control" id="time_period" name="time_period">
+                        <option value="all" {% if time_period == 'all' %}selected{% endif %}>All Time</option>
+                        <option value="daily" {% if time_period == 'daily' %}selected{% endif %}>Daily</option>
+                        <option value="weekly" {% if time_period == 'weekly' %}selected{% endif %}>Weekly</option>
+                        <option value="monthly" {% if time_period == 'monthly' %}selected{% endif %}>Monthly</option>
+                    </select>
+                </div>
+                <div class="form-group" id="date-selector" style="display: {% if time_period == 'daily' %}block{% else %}none{% endif %};"> 
+                    <label for="selected_date">Select Date:</label>
+                    <input type="date" class="form-control" id="selected_date" name="selected_date" value="{{ selected_date }}">
+                </div>
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form>
+            
+            
+            <script>
+                const timePeriodSelect = document.getElementById('time_period');
+                const dateSelector = document.getElementById('date-selector');
+
+                // Show/hide the date selector based on the selected time period
+                timePeriodSelect.addEventListener('change', () => {
+                    if (timePeriodSelect.value === 'daily') {
+                        dateSelector.style.display = 'block';
+                    } else {
+                        dateSelector.style.display = 'none';
+                    }
+                });
+            </script>
+        </div>
+    </div>
+      
+    
+</div>
+{% endblock %}

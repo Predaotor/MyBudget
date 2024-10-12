@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container">
+    <h3 class="mt-5">Expenses</h3>
+    
+    {% for expense in expenses %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card shadow mb-2 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-2">{{expense.date}}</div>
+                        <div class="col-md-2">{{expense.expensename}}</div>
+                        <div class="col-md-2">{{expense.amount}} zł</div>
+                        <div class="col-md-2">
+                        <span class="badge badge-primary">{{expense.category}} </span> </div>  
+                        <div class="col-md-2">
+                           <a href="{{ url_for('updateexpense', id=expense.id)}}" class="btn btn-sm btn-success">Edit</a>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="{{ url_for('delete', id=expense.id) }}" class="btn btn-sm btn-danger">Delete</a>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="mt-5">Expense breakdown</h3>
+            <div class="card shadow bb-2 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">Food</div>
+                        <div id="tfood" class="col-md-6">{{t_food}}</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card shadow bb-2 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">Entertainment</div>
+                        <div id="tentertainment" class="col-md-6">{{t_entertainment}}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card shadow bb-2 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">Business</div>
+                        <div  id="tbusiness" class="col-md-6">{{t_business}}</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card shadow bb-2 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">Transport</div>
+                        <div id="ttransport" class="col-md-6">{{t_transport}}</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card shadow bb-2 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">Rent</div>
+                        <div  id="trent" class="col-md-6">{{t_rent}}</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card shadow bb-2 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">Other</div>
+                        <div id="tother"  class="col-md-6">{{t_other}}</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card shadow bb-2 bg-white rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">Total</div>
+                        <div class="col-md-6">{{total}}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+           <h3 class="mt-5">Expense Breakdown</h3>
+                <canvas id="myChart"></canvas>
+             <form method="GET" action="{{ url_for('expenses')}}">
+             </form>
+              
+              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+              
+              <script>
+                // Wait for the DOM to be fully loaded
+                document.addEventListener('DOMContentLoaded', (event) => {
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    let myChart; // Declare a chart variable
+
+                    function updateExpenseChart() {
+                        const food = parseFloat(document.getElementById("tfood").innerHTML) || 0;
+                        const entertainment = parseFloat(document.getElementById("tentertainment").innerHTML) || 0;
+                        const business = parseFloat(document.getElementById("tbusiness").innerHTML) || 0;
+                        const transport = parseFloat(document.getElementById("ttransport").innerHTML) || 0;
+                        const rent = parseFloat(document.getElementById("trent").innerHTML) || 0;
+                        const other = parseFloat(document.getElementById("tother").innerHTML) || 0;
+
+                        const data = [food, entertainment, business, transport, rent, other];
+
+                        if (myChart) {
+                            // Chart already exists, update the data
+                            myChart.data.datasets[0].data = data;
+                            myChart.update();
+                        } else {
+              
+                myChart=new Chart(ctx, {
+                  type: 'pie',
+                  data: {
+                    labels: ['Food', 'Entertainment',  'Business','Transport', 'Rent', 'Other'],
+                    datasets: [{
+                      label: '# of Expenses',
+                      data: [food, entertainment, business,transport, rent, other],
+                      borderWidth: 1
+                    }]
+                  },
+                  options: {
+                    scales: {
+                      y: {
+                        beginAtZero: true
+                      }
+                    }
+                  }
+                });
+            }
+        }
+        updateExpenseChart();
+
+        
+    });
+              </script>
+            </div>
+    </div>
+
+</div> 
+ {% endblock %}

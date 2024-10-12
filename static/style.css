@@ -1,0 +1,78 @@
+/* General Styling */
+body {
+    font-family: "Roboto", sans-serif; /* Your chosen font */
+    background-color: #f8f9fa; /* Light background for a clean look */
+    color: #343a40; /* Dark gray for text contrast */
+  }
+  
+  /* Typography */
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600; /* Slightly bolder headings */
+  }
+  
+  /* Links */
+  a {
+    color: #007bff; /* Bootstrap's primary blue */
+    text-decoration: none;
+  }
+  
+  a:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    background-color: #28a745; /* Green for a positive feel */
+    border-color: #28a745; 
+  }
+  
+  .btn-primary:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+  
+  /* Forms */
+  .form-control {
+    border-radius: 0.25rem; /* Slightly rounded corners */
+  }
+  
+  .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25); /* Green focus outline */
+  }
+  
+  /* Tables */
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  th, td {
+    border: 1px solid #dee2e6; /* Light gray border */
+    padding: 0.75rem;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f8f9fa; /* Match body background */
+    font-weight: 600;
+  }
+  
+  /* Expense Breakdown (Customize as needed) */
+  .expense-category {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .expense-amount {
+    text-align: right;
+  }
+  
+  /* Chart.js (Optional) */
+  #expenseChart {
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    padding: 1rem;
+    border-radius: 0.25rem;
+  }
+  

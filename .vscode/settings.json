@@ -1,0 +1,4 @@
+{
+    "DockerRun.DisableDockerrc": true,
+    "CodeGPT.apiKey": "CodeGPT Plus Beta"
+}
