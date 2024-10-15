@@ -88,7 +88,7 @@ def add():
             expensename=expensename,
             amount=amount,
             category=category,
-            user_id=current_user.id  # Associate expense with logged-in user
+            
         )
         db.session.add(expense)
         db.session.commit()
